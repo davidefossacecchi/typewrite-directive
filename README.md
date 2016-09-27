@@ -14,7 +14,7 @@ Installation: import typewriter.js and typewriter.css in your project and add "p
 <h3>That's it! Now go on to see the effect behavior with some example (I think is better for you if you watch the demo in the repo instead)</h3>
 Basic usage: passing an array of sentences
 
-`<div typewriter sentences="sequence"></div>
+`<div typewriter sentences="sequence"></div>`
 
 
 If you pass a string, that will be typed just one time and de cursor will be removed at the end
