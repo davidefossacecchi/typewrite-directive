@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+	  <meta charset="UTF-8">
+	  <title>TypeWriter Directive Demo</title>
+	  
+
+	  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+	  <script src="src/typewriter.js"></script>
+	  <script src="script.js"></script>
+	  <link rel="stylesheet" type="text/css" href="src/typewriter.css">
+	  <style>
+		p.code {
+			margin: 3px 0 15px;
+			background-color: #eee;
+			border-left: solid 5px #ccc;
+			padding: 0 3px;
+		}
+	  </style>
+	</head>
+<body>
+  	<div  ng-app="phox.utils" ng-controller="test.controller" style="margin:auto; width: 90%;">
+  		<h2>Typewriter: an easy to use and jQuery-free Angular 1.x directive</h2>
+  		<p>
+  			This is just a graphical effect of someone typing sentences on your page.</br>
+  			This directive allow you to pass a string or an array of strings in the "sentences" attribute (behavior is explained later).</br>
+  			Since is restricted to attributes, it can be applied to any (empty) tag you want.</br>
+  			Is slightly configurable through some attributes:
+  			<ul>
+  				<li>[boolean] randomize: define if the sentence to type has to be defined randomly or following the array sequence</li>
+  				<li>[integer - ms] type-delay: specifies the delay between each letter</li>
+  				<li>[integer - ms] erase-delay: specifies the delay between the tipyng of the last letter and the beginning of the canceling</li>
+  				<li>[integer - ms] initial-delay: specifies the delay between the page loading and the beginning of typing</li>
+  			</ul>
+  			<strong>Installation: </strong> import typewriter.js and typewriter.css in your project and add "phox.typewriter" module to your angular module dependencies
+  			</br></br>
+  			<h3>That's it! Now go on to see the effect behavior with some example</h3>
+  		</p>
+  		<div typewriter sentences="sequence"></div>
+  		<p class="code">
+	  		<code>
+	  			<strong>
+	  				Basic usage: passing an array of sentences
+	  			</strong></br>
+	  			&#60;div typewriter sentences="sequence"&#62;&#60;/div&#62;
+	  		</code>
+	  	</p>
+  		<div typewriter sentences="single_sentence"></div>
+  		<p class="code">
+	  		<code>
+	  			<strong>
+	  				If you pass a string, that will be typed just one time and de cursor will be removed at the end
+	  			</strong></br>
+	  			&#60;div typewriter sentences="single_sentence"&#62;&#60;/div&#62;
+	  		</code>
+	  	</p>
+  		<div typewriter sentences="random" randomize="true"></div>
+  		<p class="code">
+	  		<code>
+	  			<strong>
+	  				You can ask to randomize the sentences in the array to let the user display a new sentence at each page reload
+	  			</strong></br>
+	  			&#60;div typewriter sentences="sentences" randomize="true"&#62;&#60;/div&#62;
+	  		</code>
+	  	</p>
+  		<div typewriter sentences="faster" type-delay="50"></div>
+  		<p class="code">
+	  		<code>
+	  			<strong>
+	  				You can ask to type faster, specifing a type delay lower than the default one (150ms)
+	  			</strong></br>
+	  			&#60;div typewriter sentences="sentences" type-delay="50"&#62;&#60;/div&#62;
+	  		</code>
+	  	</p>
+  		<div typewriter sentences="slower" type-delay="300"></div>
+  		<p class="code">
+	  		<code>
+	  			<strong>
+	  				You can ask to type slower, specifing a type delay higher than the default one (150ms)
+	  			</strong></br>
+	  			&#60;div typewriter sentences="sentences" type-delay="300"&#62;&#60;/div&#62;
+	  		</code>
+	  	</p>
+  	</div>
+  	
+</div>
+</body>
+</html>

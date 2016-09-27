@@ -1,0 +1,70 @@
+angular.module('phox.typewriter', [])
+	.directive('typewriter', ['$interval', '$timeout',
+		function($interval, $timeout){
+			return {
+				restrict: 'A',
+				scope: {
+					sentences: '='
+				},
+				link: function(scope, elem, attrs){
+					var type_delay = attrs['typeDelay'] || 150;
+					var erase_delay = attrs['eraseDelay'] || 3000;
+					var initial_delay = attrs['initialDelay'] || 1000;
+					var randomize = attrs['randomize'];
+					var step = 1;
+					var stop = 0;
+					var sentence;
+					var sentences_shoulder = [];
+					var typed = document.createTextNode('');
+					var cursor = document.createElement('span');
+					var cursor_char = document.createTextNode('|');
+					var interval_promise;
+
+					cursor.className = 'blink_me';
+					cursor.appendChild(cursor_char);
+					elem[0].appendChild(typed)
+					elem[0].appendChild(cursor);
+
+					restart();
+
+					function loop(){
+						stop += step;
+						typed.nodeValue = sentence.substr(0, stop);
+						if(stop === 0 || stop === sentence.length){
+							$interval.cancel(interval_promise);
+							step *= -1
+							if(angular.isArray(scope.sentences)){
+								restart();
+							}
+							else elem[0].removeChild(cursor)
+						}
+					}
+
+
+					function getNextSentence(){
+						var index;
+						if(scope.sentences.length === 0){
+							scope.sentences = sentences_shoulder;
+							sentences_shoulder = [];
+						}
+
+						index = randomize ? Math.round( Math.random() * (scope.sentences.length - 1) ) : 0;
+						return scope.sentences.splice(index, 1)[0];
+					}
+
+					function restart(){
+						if(stop === 0){
+							sentence = angular.isArray(scope.sentences) ? getNextSentence() : scope.sentences;
+							sentences_shoulder.push(sentence);
+						}
+						$timeout(
+							function(){
+								initial_delay = erase_delay;
+								interval_promise = $interval(loop, type_delay);
+							}, initial_delay
+						)
+					}
+
+				}
+			}
+		}])
