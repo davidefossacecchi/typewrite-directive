@@ -31,5 +31,10 @@ angular.module('phox.utils',['phox.typewriter'])
 	   			'you can set',
 	   			'a different type of cursor'
 	   		];
+
+	   		$scope.new_line = [
+	   			'if you set new-line attibute to true',
+	   			'typewriter will clean the line at each new sentence'
+	   		];
 	    }
    ]);

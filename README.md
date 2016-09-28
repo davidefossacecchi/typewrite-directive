@@ -9,6 +9,8 @@ Is slightly configurable through some attributes:
 * [integer - ms] type-delay: specifies the delay between each letter (default: 150ms)
 * [integer - ms] erase-delay: specifies the delay between the tipyng of the last letter and the beginning of the canceling (default: 3000ms)
 * [integer - ms] initial-delay: specifies the delay of the beginning of typing when the displayed string is empty (default: 750ms)
+* [char] cursor: specifies the typing cursor (default: '|')
+* [boolean] new-line: set typewriter to clear the line at the end of each sentense (waits the erase-delay, of course)(default: false)
 
 Installation: import typewriter.js and typewriter.css in your project and add "phox.typewriter" module to your angular module dependencies
 <h3>That's it! Now go on to see the effect behavior with some example (I think is better for you if you watch the demo in the repo instead)</h3>
@@ -35,3 +37,11 @@ You can ask to type faster, specifing a type delay lower than the default one (1
 You can ask to type slower, specifing a type delay higher than the default one (150ms)
 
 `<div typewriter sentences="sentences" type-delay="300"></div>`
+
+You can set a different cursor character (default : '|')
+
+`<div typewriter sentences="sentences" cursor="▊"></div>`
+
+Setting 'new-line' attribute to true, typewriter will clear the line at the end of each sentence (default: false)
+
+`<div typewriter sentences="sentences" new-line="true"></div>`
