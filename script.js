@@ -26,5 +26,10 @@ angular.module('phox.utils',['phox.typewriter'])
 	   			'to type',
 	   			'slower'
 	   		];
+
+	   		$scope.cursor = [
+	   			'you can set',
+	   			'a different type of cursor'
+	   		];
 	    }
    ]);

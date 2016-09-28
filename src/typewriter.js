@@ -11,17 +11,20 @@ angular.module('phox.typewriter', [])
 					var erase_delay = attrs['eraseDelay'] || 3000;
 					var initial_delay = attrs['initialDelay'] || 1000;
 					var randomize = attrs['randomize'];
+					var cursor_char = attrs['cursor'] || '|';
 					var step = 1;
 					var stop = 0;
 					var sentence;
 					var sentences_shoulder = [];
+
 					var typed = document.createTextNode('');
 					var cursor = document.createElement('span');
-					var cursor_char = document.createTextNode('|');
+					var display_cursor = document.createTextNode(cursor_char);
+					
 					var interval_promise;
 
 					cursor.className = 'blink_me';
-					cursor.appendChild(cursor_char);
+					cursor.appendChild(display_cursor);
 					elem[0].appendChild(typed)
 					elem[0].appendChild(cursor);
 
