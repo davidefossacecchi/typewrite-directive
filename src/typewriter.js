@@ -9,7 +9,7 @@ angular.module('phox.typewriter', [])
 				link: function(scope, elem, attrs){
 					var type_delay = attrs['typeDelay'] || 150;
 					var erase_delay = attrs['eraseDelay'] || 3000;
-					var initial_delay = attrs['initialDelay'] || 1000;
+					var initial_delay = attrs['initialDelay'] || 750;
 					var randomize = attrs['randomize'];
 					var cursor_char = attrs['cursor'] || '|';
 					var step = 1;
@@ -62,11 +62,19 @@ angular.module('phox.typewriter', [])
 						}
 						$timeout(
 							function(){
-								initial_delay = erase_delay;
 								interval_promise = $interval(loop, type_delay);
-							}, initial_delay
+							}, getLoopDelay()
 						)
 					}
+
+					function getLoopDelay(){
+						if(step === -1) return erase_delay;
+						else return initial_delay;
+					}
+
+					scope.$on('$destroy', function(){
+						$interval.cancel(interval_promise);
+					})
 
 				}
 			}

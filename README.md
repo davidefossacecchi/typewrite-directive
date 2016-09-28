@@ -5,10 +5,10 @@ This directive allow you to pass a string or an array of strings in the "sentenc
 Since is restricted to attributes, it can be applied to any (empty) tag you want.
 Is slightly configurable through some attributes:
 
-* [boolean] randomize: define if the sentence to type has to be defined randomly or following the array sequence
-* [integer - ms] type-delay: specifies the delay between each letter
-* [integer - ms] erase-delay: specifies the delay between the tipyng of the last letter and the beginning of the canceling
-* [integer - ms] initial-delay: specifies the delay between the page loading and the beginning of typing
+* [boolean] randomize: define if the sentence to type has to be defined randomly or following the array sequence (default: false)
+* [integer - ms] type-delay: specifies the delay between each letter (default: 150ms)
+* [integer - ms] erase-delay: specifies the delay between the tipyng of the last letter and the beginning of the canceling (default: 3000ms)
+* [integer - ms] initial-delay: specifies the delay of the beginning of typing when the displayed string is empty (default: 750ms)
 
 Installation: import typewriter.js and typewriter.css in your project and add "phox.typewriter" module to your angular module dependencies
 <h3>That's it! Now go on to see the effect behavior with some example (I think is better for you if you watch the demo in the repo instead)</h3>
