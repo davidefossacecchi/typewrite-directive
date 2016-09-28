@@ -12,6 +12,7 @@ angular.module('phox.typewriter', [])
 					var initial_delay = attrs['initialDelay'] || 750;
 					var randomize = attrs['randomize'];
 					var cursor_char = attrs['cursor'] || '|';
+					var new_line = attrs['newLine'] || false;
 					var step = 1;
 					var stop = 0;
 					var sentence;
@@ -35,7 +36,8 @@ angular.module('phox.typewriter', [])
 						typed.nodeValue = sentence.substr(0, stop);
 						if(stop === 0 || stop === sentence.length){
 							$interval.cancel(interval_promise);
-							step *= -1
+							if(new_line) stop = 0;
+							else step *= -1
 							if(angular.isArray(scope.sentences)){
 								restart();
 							}
