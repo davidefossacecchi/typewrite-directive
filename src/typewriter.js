@@ -65,13 +65,13 @@ angular.module('phox.typewriter', [])
 					}
 
 					function getLoopDelay(){
-                    	if(step === -1) return erase_delay;
-                    	else return initial_delay;
-                    }
+						if(step === -1) return erase_delay;
+						else return initial_delay;
+					}
 
 					scope.$on('$destroy', function(){
-                        $interval.cancel(interval_promise);
-                    })
+						$interval.cancel(interval_promise);
+					})
 
 				}
 			}
