@@ -65,6 +65,10 @@ angular.module('phox.typewriter', [])
 						)
 					}
 
+					scope.$on('$destroy', function(){
+                        $interval.cancel(interval_promise);
+                    })
+
 				}
 			}
 		}])
