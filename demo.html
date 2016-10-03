@@ -33,6 +33,7 @@
   				<li>[integer - ms] initial-delay: specifies the delay of the beginning of typing when the displayed string is empty (default: 750ms)</li>
   				<li>[char] cursor: specifies the typing cursor (default: '|')</li>
   				<li>[boolean] new-line: set typewriter to clear the line at the end of each sentense (waits the erase-delay, of course)(default: false)</li>
+  				<li>[integer] humanize: espress the variabily percentage of the typing delay(default: 0)</li>
   			</ul>
   			<strong>Installation: </strong> import typewriter.js and typewriter.css in your project and add "phox.typewriter" module to your angular module dependencies
   			</br></br>
@@ -99,6 +100,15 @@
 	  				Setting 'new-line' attribute to true, typewriter will clear the line at the end of each sentence (default: false)
 	  			</strong></br>
 	  			&#60;div typewriter sentences="sentences" new-line="true"&#62;&#60;/div&#62;
+	  		</code>
+	  	</p>
+	  	<div typewriter sentences="humanize" humanize="30"></div>
+  		<p class="code">
+	  		<code>
+	  			<strong>
+	  				You can specify a varibility percentage to make the writing more human-like.
+	  			</strong></br>
+	  			&#60;div typewriter sentences="sequence" humanize="30"&#62;&#60;/div&#62;
 	  		</code>
 	  	</p>
   	</div>

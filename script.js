@@ -36,5 +36,7 @@ angular.module('phox.utils',['phox.typewriter'])
 	   			'if you set new-line attibute to true',
 	   			'typewriter will clean the line at each new sentence'
 	   		];
+
+	   		$scope.humanize = "you can specify a random variability of the typing delay, espressed as a percentage of the typing delay itself, to make the typing more human-like";
 	    }
    ]);
