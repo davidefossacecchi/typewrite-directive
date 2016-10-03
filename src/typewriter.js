@@ -7,12 +7,14 @@ angular.module('phox.typewriter', [])
 					sentences: '='
 				},
 				link: function(scope, elem, attrs){
-					var type_delay = attrs['typeDelay'] || 150;
-					var erase_delay = attrs['eraseDelay'] || 3000;
-					var initial_delay = attrs['initialDelay'] || 750;
+					var type_delay = +attrs['typeDelay'] || 150;
+					var erase_delay = +attrs['eraseDelay'] || 3000;
+					var initial_delay = +attrs['initialDelay'] || 750;
 					var randomize = attrs['randomize'];
 					var cursor_char = attrs['cursor'] || '|';
 					var new_line = attrs['newLine'] || false;
+					var humanize = attrs['humanize'] ? (2 * type_delay / 100 * +attrs['humanize']) : 0;
+					
 					var step = 1;
 					var stop = 0;
 					var sentence;
@@ -21,28 +23,34 @@ angular.module('phox.typewriter', [])
 					var typed = document.createTextNode('');
 					var cursor = document.createElement('span');
 					var display_cursor = document.createTextNode(cursor_char);
-					
-					var interval_promise;
 
 					cursor.className = 'blink_me';
 					cursor.appendChild(display_cursor);
 					elem[0].appendChild(typed)
 					elem[0].appendChild(cursor);
 
-					restart();
+					start();
+
+					function start(){
+						if(stop === 0){
+							sentence = angular.isArray(scope.sentences) ? getNextSentence() : scope.sentences;
+							sentences_shoulder.push(sentence);
+						}
+						$timeout(loop, getLoopDelay());
+					}
 
 					function loop(){
 						stop += step;
 						typed.nodeValue = sentence.substr(0, stop);
 						if(stop === 0 || stop === sentence.length){
-							$interval.cancel(interval_promise);
 							if(new_line) stop = 0;
 							else step *= -1
 							if(angular.isArray(scope.sentences)){
-								restart();
+								start();
 							}
 							else elem[0].removeChild(cursor)
 						}
+						else $timeout(loop, getNextTypeDelay());
 					}
 
 
@@ -57,26 +65,16 @@ angular.module('phox.typewriter', [])
 						return scope.sentences.splice(index, 1)[0];
 					}
 
-					function restart(){
-						if(stop === 0){
-							sentence = angular.isArray(scope.sentences) ? getNextSentence() : scope.sentences;
-							sentences_shoulder.push(sentence);
-						}
-						$timeout(
-							function(){
-								interval_promise = $interval(loop, type_delay);
-							}, getLoopDelay()
-						)
-					}
-
 					function getLoopDelay(){
 						if(step === -1) return erase_delay;
 						else return initial_delay;
 					}
 
-					scope.$on('$destroy', function(){
-						$interval.cancel(interval_promise);
-					})
+					function getNextTypeDelay(){
+						if(step === -1) return type_delay
+						else if(!humanize) return type_delay;
+						else return Math.round(type_delay - humanize + (humanize * Math.random()));
+					}
 
 				}
 			}
