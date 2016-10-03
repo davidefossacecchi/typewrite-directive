@@ -1,0 +1,24 @@
+{
+  "name": "typewrite-directive",
+  "version": "1.0.0",
+  "description": "an easy to use and jQuery-free Angular 1.x directive",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/davidefossacecchi/typewrite-directive.git"
+  },
+  "keywords": [
+    "typewrite",
+    "directive",
+    "jquery-free",
+    "angular"
+  ],
+  "author": "Fossacecchi Davide",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/davidefossacecchi/typewrite-directive/issues"
+  }
+}
