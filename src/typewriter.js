@@ -14,20 +14,23 @@ angular.module('phox.typewriter', [])
 					var cursor_char = attrs['cursor'] || '|';
 					var new_line = attrs['newLine'] || false;
 					var humanize = attrs['humanize'] ? (2 * type_delay / 100 * +attrs['humanize']) : 0;
-					
+					var manage_placeholder = attrs['managePlaceholder'] || false;
+
 					var step = 1;
 					var stop = 0;
 					var sentence;
 					var sentences_shoulder = [];
 
-					var typed = document.createTextNode('');
-					var cursor = document.createElement('span');
-					var display_cursor = document.createTextNode(cursor_char);
+					if(!manage_placeholder){
+						var typed = document.createTextNode('');
+						var cursor = document.createElement('span');
+						var display_cursor = document.createTextNode(cursor_char);
 
-					cursor.className = 'blink_me';
-					cursor.appendChild(display_cursor);
-					elem[0].appendChild(typed)
-					elem[0].appendChild(cursor);
+						cursor.className = 'blink_me';
+						cursor.appendChild(display_cursor);
+						elem[0].appendChild(typed)
+						elem[0].appendChild(cursor);
+					}
 
 					start();
 
@@ -41,18 +44,22 @@ angular.module('phox.typewriter', [])
 
 					function loop(){
 						stop += step;
-						typed.nodeValue = sentence.substr(0, stop);
+						setTargetText(sentence.substr(0, stop));
 						if(stop === 0 || stop === sentence.length){
 							if(new_line) stop = 0;
 							else step *= -1
 							if(angular.isArray(scope.sentences)){
 								start();
 							}
-							else elem[0].removeChild(cursor)
+							else if(cursor) elem[0].removeChild(cursor)
 						}
 						else $timeout(loop, getNextTypeDelay());
 					}
 
+					function setTargetText(text){
+						if(!manage_placeholder) typed.nodeValue = text;
+						else elem[0].placeholder = text;
+					}
 
 					function getNextSentence(){
 						var index;
